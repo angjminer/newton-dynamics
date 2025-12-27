@@ -217,6 +217,12 @@
 	#define D_CORE_API 
 #endif
 
+#if defined(_MSC_VER)
+	#define D_FORCE_INLINE __forceinline 
+#else
+	#define D_FORCE_INLINE inline
+#endif
+
 typedef float ndReal;
 typedef int8_t ndInt8;
 typedef uint8_t ndUnsigned8;
