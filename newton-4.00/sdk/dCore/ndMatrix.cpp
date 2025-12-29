@@ -45,13 +45,6 @@ ndMatrix ndMatrix::Multiply3X3 (const ndMatrix &B) const
 
 ndMatrix ndMatrix::operator* (const ndMatrix &B) const
 {
-	//return Multiply(B);
-	//return ndMatrix (
-	//	B.m_front * m_front.BroadcastX() + B.m_up * m_front.BroadcastY() + B.m_right * m_front.BroadcastZ() + B.m_posit * m_front.BroadcastW(), 
-	//	B.m_front * m_up.BroadcastX()    + B.m_up * m_up.BroadcastY()    + B.m_right * m_up.BroadcastZ()    + B.m_posit * m_up.BroadcastW(), 
-	//	B.m_front * m_right.BroadcastX() + B.m_up * m_right.BroadcastY() + B.m_right * m_right.BroadcastZ() + B.m_posit * m_right.BroadcastW(), 
-	//	B.m_front * m_posit.BroadcastX() + B.m_up * m_posit.BroadcastY() + B.m_right * m_posit.BroadcastZ() + B.m_posit * m_posit.BroadcastW()); 
-
 	ndVector front(B.m_front * m_front.BroadcastX());
 	front = front.MulAdd(B.m_up, m_front.BroadcastY());
 	front = front.MulAdd(B.m_right, m_front.BroadcastZ());

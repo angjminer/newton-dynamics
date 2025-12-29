@@ -515,7 +515,7 @@ ndDemoEntityManager::ndDemoEntityManager()
 
 	// initialized the physics world for the new scene
 	//m_showUI = false;
-	m_showAABB = true;
+	//m_showAABB = true;
 	//m_showScene = true;
 	//m_showConcaveEdge = true;
 	//m_showMeshSkeleton = true;
@@ -530,7 +530,7 @@ ndDemoEntityManager::ndDemoEntityManager()
 	//m_solverSubSteps = 2;
 	//m_showRaycastHit = true;
 	//m_showCenterOfMass = true;
-	m_showNormalForces = true;
+	//m_showNormalForces = true;
 	//m_showContactPoints = true;
 	//m_showJointDebugInfo = true;
 	//m_showModelsDebugInfo = true;
