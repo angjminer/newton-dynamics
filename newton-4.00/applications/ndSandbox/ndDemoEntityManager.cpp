@@ -43,7 +43,8 @@
 //#define DEFAULT_SCENE	16		// third person player capsule
 //#define DEFAULT_SCENE	17		// cart pole SAC trained controller
 //#define DEFAULT_SCENE	18		// cart pole PPO trained controller
-//#define DEFAULT_SCENE	19		// procedurally animated quadruped spider
+//#define DEFAULT_SCENE	19		// unicycle PPO trained controller
+//#define DEFAULT_SCENE	20		// procedurally animated quadruped spider
 
 // These are the machine learning training demos
 //#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 0)	// train cart pole using SAC agent
@@ -90,7 +91,7 @@ void ndBasicStaticMeshCollision(ndDemoEntityManager* const scene);
 void ndPlayerCapsule_ThirdPerson(ndDemoEntityManager* const scene);
 void ndBasicSceneCompoundCollision(ndDemoEntityManager* const scene);
 
-
+void ndUniCyclePlayer_PPO(ndDemoEntityManager* const scene);
 void ndCartpoleSacTraining(ndDemoEntityManager* const scene);
 void ndCartpolePpoTraining(ndDemoEntityManager* const scene);
 
@@ -115,18 +116,13 @@ ndDemoEntityManager::ndDemos ndDemoEntityManager::m_demosSelection[] =
 	{ "basic player", ndPlayerCapsule_ThirdPerson},
 	{ "cart pole SAC player controller", ndCartpolePlayer_SAC},
 	{ "cart pole PPO player controller", ndCartpolePlayer_PPO},
+	{ "unicycle PPO player controller", ndUniCyclePlayer_PPO},
 	{ "procedural animated quad spider", ndQuadSpiderAnimated},
-	
 
 #if 0
-	{ "basic object placement", ndObjectPlacement},
 	{ "basic particle fluid", ndBasicParticleFluid},
 	{ "basic vehicle", ndBasicVehicle},
 	{ "heavy vehicle", ndHeavyVehicle},
-
-	{ "cartpole discrete controller", ndCartpoleDiscrete},
-	{ "unicycle controller", ndUnicycleController},
-	{ "quadruped animated", ndQuadruped_animation_test},
 	{ "quadruped sac", ndQuadruped_sac_test},
 	{ "quadruped ppo", ndQuadruped_ppo_test},
 	//{ "quadruped test 3", ndQuadrupedTest_3},
