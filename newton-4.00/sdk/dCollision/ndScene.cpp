@@ -424,7 +424,7 @@ void ndScene::UpdateTransformNotify(ndFloat32 timestep, ndBodyKinematic* const b
 	if (body->m_transformIsDirty)
 	{
 		body->m_transformIsDirty = 0;
-		ndBodyNotify* const notify = body->GetNotifyCallback();
+		ndBodyNotify* const notify = *body->GetNotifyCallback();
 		if (notify)
 		{
 			//notify->OnTransform(threadIndex, body->GetMatrix());
@@ -748,7 +748,7 @@ void ndScene::SubmitPairs(ndBvhLeafNode* const leafNode, ndBvhNode* const node, 
 	const ndUnsigned8 test0 = ndUnsigned8(!body0->m_equilibrium);
 	const ndUnsigned8 fowardTest = forward ? ndUnsigned8(1) : ndUnsigned8(0);
 
-	ndBodyNotify* const notify = body0->GetNotifyCallback();
+	ndBodyNotify* const notify = *body0->GetNotifyCallback();
 
 	pool.PushBack(node);
 	while (pool.GetCount() && (pool.GetCount() < (D_SCENE_MAX_STACK_DEPTH - 16)))
@@ -871,7 +871,7 @@ void ndScene::UpdateTransform()
 	{
 		ndBodyParticleSet* const particleSet = node->GetInfo()->GetAsBodyParticleSet();
 		ndAssert(particleSet);
-		ndBodyNotify* const notify = particleSet->GetNotifyCallback();
+		ndBodyNotify* const notify = *particleSet->GetNotifyCallback();
 		if (notify)
 		{
 			notify->OnTransform(0, particleSet->GetMatrix());

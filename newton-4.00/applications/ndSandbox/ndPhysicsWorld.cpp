@@ -67,7 +67,7 @@ void ndPhysicsWorld::ndDeffereDeadBodies::RemovePendingBodies()
 	for (ndInt32 i = ndInt32 (GetCount()) - 1; i >= 0 ; --i)
 	{
 		ndBodyKinematic* const body = (*this)[i]->GetAsBodyKinematic();
-		ndDemoEntityNotify* const notification = (ndDemoEntityNotify*)body->GetNotifyCallback();
+		ndDemoEntityNotify* const notification = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 		m_owner->m_defferedDeadEntities.Append(notification->GetUserData());
 		m_owner->RemoveBody(body);
 	}
@@ -160,7 +160,7 @@ void ndPhysicsWorld::PostUpdate(ndFloat32 timestep)
 		ndBodyKinematic* const body = view[i];
 		if (!body->GetSleepState())
 		{
-			ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+			ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 			if (notify)
 			{
 				notify->m_entity->SetTransform(notify->m_transform.m_rotation, notify->m_transform.m_position);

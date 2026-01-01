@@ -59,11 +59,11 @@ class ndBackGroundVehicleController : public ndModelNotify
 		,m_desiredSpeed(ndFloat32(0.0f))
 		,m_desiredAngularSpeedFactor(ndFloat32(0.0f))
 	{
-		ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetAsBodyKinematic()->GetNotifyCallback();
+		ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetAsBodyKinematic()->GetNotifyCallback();
 		ndSharedPtr<ndRenderSceneNode> vehicleMesh(notify->GetUserData());
 
 		// iterate ove each animated mesh part, 
-		// and save the nessery information to play the animation.
+		// and save the necessary information to play the animation.
 		// is this example we only spin the tires.
 		const ndString tireId("tire");
 		const ndVector rightDir(vehicleMesh->GetTransform().GetMatrix().m_right);

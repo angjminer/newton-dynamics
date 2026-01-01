@@ -116,7 +116,7 @@ class ndPlayerCapsuleController : public ndModelNotify
 		m_cameraNode = ndSharedPtr<ndRenderSceneNode>(new ndPlayerCamera(m_playerBody->GetAsBodyPlayerCapsule(), renderer, cameraPivot, ND_THIRD_PERSON_CAMERA_DIST));
 
 		// attach the camera to the pivot node
-		ndDemoEntityNotify* const playerNotify = (ndDemoEntityNotify*)(m_playerBody->GetAsBodyKinematic()->GetNotifyCallback());
+		ndDemoEntityNotify* const playerNotify = (ndDemoEntityNotify*)*m_playerBody->GetAsBodyKinematic()->GetNotifyCallback();
 		ndSharedPtr<ndRenderSceneNode> playerMesh(playerNotify->GetUserData());
 		ndRenderSceneNode* const cameraNodePivot = playerMesh->FindByName("cameraPivot");
 		ndAssert(cameraNodePivot);
@@ -163,7 +163,7 @@ class ndPlayerCapsuleController : public ndModelNotify
 
 	void BindAnimations(ndRenderMeshLoader& loader)
 	{
-		ndDemoEntityNotify* const playerNotify = (ndDemoEntityNotify*)(m_playerBody->GetAsBodyKinematic()->GetNotifyCallback());
+		ndDemoEntityNotify* const playerNotify = (ndDemoEntityNotify*)*m_playerBody->GetAsBodyKinematic()->GetNotifyCallback();
 		ndSharedPtr<ndRenderSceneNode> playerMesh(playerNotify->GetUserData());
 
 		ndSharedPtr<ndAnimationSequence> runSequence(loader.FindSequence(ndGetWorkingFileName("mocap_run.fbx")));

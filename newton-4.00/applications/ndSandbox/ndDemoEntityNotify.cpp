@@ -30,7 +30,7 @@ ndDemoEntityNotify::ndDemoEntityNotify(ndDemoEntityManager* const manager, const
 	else
 	{
 		// handle hierarchies of rigid nodies 
-		ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)parentBody->GetNotifyCallback();
+		ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*parentBody->GetNotifyCallback();
 		ndSharedPtr<ndRenderSceneNode> parentEntity (notify->GetUserData());
 
 		ndMatrix matrix(ndGetIdentityMatrix());

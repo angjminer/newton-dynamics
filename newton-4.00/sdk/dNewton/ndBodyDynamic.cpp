@@ -127,7 +127,7 @@ void ndBodyDynamic::ApplyExternalForces(ndInt32 threadIndex, ndFloat32 timestep)
 {
 	m_externalForce = ndVector::m_zero;
 	m_externalTorque = ndVector::m_zero;
-	if (m_notifyCallback)
+	if (*m_notifyCallback)
 	{
 		m_notifyCallback->OnApplyExternalForce(threadIndex, timestep);
 		ndAssert(m_externalForce.m_w == ndFloat32(0.0f));

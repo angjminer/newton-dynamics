@@ -80,18 +80,18 @@ ndBody::ndBody(const ndBody& src)
 {
 	m_uniqueIdCount++;
 	m_transformIsDirty = 1;
-	if (src.m_notifyCallback)
+	if (*src.m_notifyCallback)
 	{
-		SetNotifyCallback(src.m_notifyCallback->Clone());
+		SetNotifyCallback(ndSharedPtr<ndBodyNotify>(src.m_notifyCallback->Clone()));
 	}
 }
 
 ndBody::~ndBody()
 {
-	if (m_notifyCallback)
-	{
-		delete m_notifyCallback;
-	}
+	//if (m_notifyCallback)
+	//{
+	//	delete m_notifyCallback;
+	//}
 }
 
 bool ndBody::GetSkeletonSelfCollision() const
@@ -109,7 +109,7 @@ ndUnsigned32 ndBody::GetId() const
 	return m_uniqueId;
 }
 
-ndBodyNotify* ndBody::GetNotifyCallback() const
+ndSharedPtr<ndBodyNotify>& ndBody::GetNotifyCallback()
 {
 	return m_notifyCallback;
 }
@@ -174,19 +174,24 @@ void ndBody::SetCentreOfMass(const ndVector& com)
 	m_globalCentreOfMass = m_matrix.TransformVector(m_localCentreOfMass);
 }
 
-void ndBody::SetNotifyCallback(ndBodyNotify* const notify)
+void ndBody::SetNotifyCallback(const ndSharedPtr<ndBodyNotify>& notify)
 {
-	if (notify != m_notifyCallback)
+	//if (notify != m_notifyCallback)
+	//{
+	//	if (m_notifyCallback)
+	//	{
+	//		delete m_notifyCallback;
+	//	}
+	//	m_notifyCallback = notify;
+	//	if (m_notifyCallback)
+	//	{
+	//		m_notifyCallback->m_body = this;
+	//	}
+	//}
+	m_notifyCallback = notify;
+	if (*m_notifyCallback)
 	{
-		if (m_notifyCallback)
-		{
-			delete m_notifyCallback;
-		}
-		m_notifyCallback = notify;
-		if (m_notifyCallback)
-		{
-			m_notifyCallback->m_body = this;
-		}
+		m_notifyCallback->m_body = this;
 	}
 }
 

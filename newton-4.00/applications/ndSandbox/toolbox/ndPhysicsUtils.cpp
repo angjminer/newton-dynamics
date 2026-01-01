@@ -179,7 +179,7 @@ ndSharedPtr<ndBody> AddSphere(ndDemoEntityManager* const scene, const ndMatrix& 
 	ndPhysicsWorld* const world = scene->GetWorld();
 	world->AddBody(body);
 	
-	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 	scene->AddEntity(notify->m_entity);
 	return body;
 }
@@ -191,7 +191,7 @@ ndSharedPtr<ndBody> AddBox(ndDemoEntityManager* const scene, const ndMatrix& loc
 	ndPhysicsWorld* const world = scene->GetWorld();
 	world->AddBody(body);
 
-	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 	scene->AddEntity(notify->m_entity);
 	return body;
 }
@@ -203,7 +203,7 @@ ndSharedPtr<ndBody> AddCapsule(ndDemoEntityManager* const scene, const ndMatrix&
 	ndPhysicsWorld* const world = scene->GetWorld();
 	world->AddBody(body);
 
-	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 	scene->AddEntity(notify->m_entity);
 	return body;
 }
@@ -216,7 +216,7 @@ ndSharedPtr<ndBody> AddCylinder(ndDemoEntityManager* const scene, const ndMatrix
 	ndPhysicsWorld* const world = scene->GetWorld();
 	world->AddBody(body);
 
-	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 	scene->AddEntity(notify->m_entity);
 	return body;
 }
@@ -242,7 +242,7 @@ ndSharedPtr<ndBody> AddConvexHull(ndDemoEntityManager* const scene, const ndMatr
 	ndPhysicsWorld* const world = scene->GetWorld();
 	world->AddBody(body);
 
-	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 	scene->AddEntity(notify->m_entity);
 	return body;
 }

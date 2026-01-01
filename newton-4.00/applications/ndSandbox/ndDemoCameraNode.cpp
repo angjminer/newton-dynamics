@@ -83,7 +83,7 @@ bool ndDemoCameraNode::UpdatePickBody()
 			if (world->RayCast(rayCaster, p0, p1))
 			{
 				ndBodyKinematic* const body = (ndBodyKinematic*)rayCaster.m_contact.m_body0;
-				ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+				ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 				if (body->GetAsBodyDynamic() && notify && !strcmp(notify->ClassName(), "ndDemoEntityNotify"))
 				{
 					// filter this camera from the model hiearchy

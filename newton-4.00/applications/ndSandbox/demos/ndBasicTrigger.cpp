@@ -109,7 +109,7 @@ static void AddCompound(ndDemoEntityManager* const scene, const ndMatrix& origin
 	ndPhysicsWorld* const world = scene->GetWorld();
 	world->AddBody(body);
 
-	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)body->GetNotifyCallback();
+	ndDemoEntityNotify* const notify = (ndDemoEntityNotify*)*body->GetNotifyCallback();
 	scene->AddEntity(notify->m_entity);
 
 	ndShapeMaterial material;
