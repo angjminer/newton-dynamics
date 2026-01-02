@@ -197,13 +197,17 @@ class ndBrainAgentOnPolicyGradient_Trainer : public ndClassAlloc
 	ndList<ndSharedPtr<ndBrainAgentOnPolicyGradient_Agent>> m_agents;
 
 	ndSharedPtr<ndBrainFloatBuffer> m_meanBuffer;
-	ndSharedPtr<ndBrainFloatBuffer> m_zMeanBuffer;
 	ndSharedPtr<ndBrainFloatBuffer> m_sigmaBuffer;
+	ndSharedPtr<ndBrainFloatBuffer> m_zMeanBuffer;
 	ndSharedPtr<ndBrainFloatBuffer> m_invSigmaBuffer;
 	ndSharedPtr<ndBrainFloatBuffer> m_invSigma2Buffer;
-	
+	//ndSharedPtr<ndBrainFloatBuffer> m_reparametrizedMeanBuffer;
+	//ndSharedPtr<ndBrainFloatBuffer> m_reparametrizedSgmaBuffer;
+
+
 	ndSharedPtr<ndBrainFloatBuffer> m_meanGradiendBuffer;
 	ndSharedPtr<ndBrainFloatBuffer> m_sigmaGradiendBuffer;
+	ndSharedPtr<ndBrainFloatBuffer> m_uniformDistributionBuffer;
 
 	ndSharedPtr<ndBrainFloatBuffer> m_criticStateValue;
 
@@ -216,9 +220,11 @@ class ndBrainAgentOnPolicyGradient_Trainer : public ndClassAlloc
 
 	ndSharedPtr<ndBrainFloatBuffer> m_advantageMinibatchBuffer;
 	ndSharedPtr<ndBrainFloatBuffer> m_invMinibatchLikelihoodBuffer;
+	ndSharedPtr<ndBrainFloatBuffer> m_minibatchGaussianDistribution;
 	ndSharedPtr<ndBrainFloatBuffer> m_minibatchLikelihoodRatioBuffer;
 	ndSharedPtr<ndBrainFloatBuffer> m_minuminMiniBatchClipRatioBuffer;
 	ndSharedPtr<ndBrainFloatBuffer> m_maximunMiniBatchClipRatioBuffer;
+	
 
 	ndSharedPtr<ndBrainIntegerBuffer> m_randomShuffleMinibatchBuffer;
 
