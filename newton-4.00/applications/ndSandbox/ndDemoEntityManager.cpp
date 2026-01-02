@@ -6,7 +6,6 @@
 * 
 * Permission is granted to anyone to use this software for any purpose,
 * including commercial applications, and to alter it and redistribute it
-* including commercial applications, and to alter it and redistribute it
 * freely
 */
 
@@ -43,20 +42,18 @@
 //#define DEFAULT_SCENE	16		// third person player capsule
 //#define DEFAULT_SCENE	17		// cart pole SAC trained controller
 //#define DEFAULT_SCENE	18		// cart pole PPO trained controller
-#define DEFAULT_SCENE	19		// unicycle PPO trained controller
+//#define DEFAULT_SCENE	19		// unicycle PPO trained controller
 //#define DEFAULT_SCENE	20		// procedurally animated quadruped spider
 
 // These are the machine learning training demos
 //#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 0)	// train cart pole using SAC agent
 //#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 1)	// train cart pole using PPO agent
-//#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 2)	// train double pendulu unycycle using PPO agent
+#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 2)	// train double pendulu unycycle using PPO agent
 
 // legacy demos 
 //#define DEFAULT_SCENE	8		// particle fluid
 //#define DEFAULT_SCENE	12		// basic vehicle
 //#define DEFAULT_SCENE	13		// heavy vehicle
-//#define DEFAULT_SCENE	19		// unit cycle controller
-//#define DEFAULT_SCENE	20		// quadruped animated 1
 //#define DEFAULT_SCENE	21		// quadruped sac trained
 //#define DEFAULT_SCENE	22		// quadruped ppo trained
 //#define DEFAULT_SCENE	23		// quadruped test 3
