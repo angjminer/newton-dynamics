@@ -653,7 +653,7 @@ class ndShapeConvexHull::ndConvexBox
 		return m_vertex[index];
 	}
 
-	ndVector ndShapeConvexHull::SupportVertexhierarchical(const ndVector& dir, ndInt32* const vertexIndex) const
+	ndVector ndShapeConvexHull::SupportVertexHierarchical(const ndVector& dir, ndInt32* const vertexIndex) const
 	{
 		const ndInt32 ix = (dir[0] > ndFloat64(0.0f)) ? 1 : 0;
 		const ndInt32 iy = (dir[1] > ndFloat64(0.0f)) ? 1 : 0;
@@ -1375,7 +1375,7 @@ class ndShapeConvexHull::ndConvexBox
 		return m_vertex[index];
 	}
 
-	ndVector ndShapeConvexHull::SupportVertexhierarchical(const ndVector& dir, ndInt32* const vertexIndex) const
+	ndVector ndShapeConvexHull::SupportVertexHierarchical(const ndVector& dir, ndInt32* const vertexIndex) const
 	{
 		const ndInt32 ix = (dir[0] > ndFloat64(0.0f)) ? 1 : 0;
 		const ndInt32 iy = (dir[1] > ndFloat64(0.0f)) ? 1 : 0;
@@ -1630,8 +1630,8 @@ ndVector ndShapeConvexHull::SupportVertex(const ndVector& dir) const
 	ndAssert(dir.m_w == ndFloat32(0.0f));
 	if (m_vertexCount > D_CONVEX_VERTEX_BRUTE_FORCE_SPLIT)
 	{
-		//return SupportVertexhierarchical(dir, vertexIndex);
-		return SupportVertexhierarchical(dir, nullptr);
+		//return SupportVertexHierarchical(dir, vertexIndex);
+		return SupportVertexHierarchical(dir, nullptr);
 	}
 	else
 	{
@@ -1645,7 +1645,7 @@ ndVector ndShapeConvexHull::SupportFeatureVertex(const ndVector& dir, ndInt32* c
 	ndAssert(dir.m_w == ndFloat32(0.0f));
 	if (m_vertexCount > D_CONVEX_VERTEX_BRUTE_FORCE_SPLIT)
 	{
-		return SupportVertexhierarchical(dir, vertexIndex);
+		return SupportVertexHierarchical(dir, vertexIndex);
 	}
 	else
 	{

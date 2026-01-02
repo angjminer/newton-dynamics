@@ -49,7 +49,7 @@ class ndShapeConvexHull : public ndShapeConvex
 	
 	private:
 	ndVector SupportVertexBruteForce(const ndVector& dir, ndInt32* const vertexIndex) const;
-	ndVector SupportVertexhierarchical(const ndVector& dir, ndInt32* const vertexIndex) const;
+	ndVector SupportVertexHierarchical(const ndVector& dir, ndInt32* const vertexIndex) const;
 	
 	void DebugShape(const ndMatrix& matrix, ndShapeDebugNotify& debugCallback) const override;
 
