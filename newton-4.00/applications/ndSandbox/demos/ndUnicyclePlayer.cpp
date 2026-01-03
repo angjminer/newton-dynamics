@@ -152,10 +152,10 @@ namespace ndUnicyclePlayer
 		}
 
 #if 1
-		ndIkSolver solver;
+		//ndIkSolver solver;
+		//ndFixSizeArray<ndJointBilateralConstraint*, 64> extraJoint;
 		const ndMatrix comFrame(ndGetIdentityMatrix());
-		ndFixSizeArray<ndJointBilateralConstraint*, 64> extraJoint;
-		const ndModelArticulation::ndCenterOfMassDynamics comDynamics(GetModel()->GetAsModelArticulation()->CalculateCentreOfMassDynamics(solver, comFrame, extraJoint, m_timestep));
+		const ndModelArticulation::ndCenterOfMassDynamics comDynamics(GetModel()->GetAsModelArticulation()->CalculateCentreOfMassKinematics(comFrame));
 
 		const ndVector comOmega(comDynamics.m_omega);
 		const ndVector comAlpha(comDynamics.m_alpha);
@@ -165,38 +165,38 @@ namespace ndUnicyclePlayer
 		ndFloat32 modelAlpha = planePin.DotProduct(comAlpha).GetScalar();
 		ndFloat32 modelOmega = planePin.DotProduct(comOmega).GetScalar();
 
-		ndFloat32 modelOmegaReward = ndExp(-500.0f * modelOmega * modelOmega);
-		ndFloat32 modelAlphaReward = ndExp(-100.0f * modelAlpha * modelAlpha);
+		ndFloat32 modelOmegaReward = ndExp(-1.0f * modelOmega * modelOmega);
+		ndFloat32 modelAlphaReward = ndExp(-0.5f * modelAlpha * modelAlpha);
 		ndFloat32 wheelReward = ndExp(-0.1f * wheelOmega * wheelOmega);
 
-		static bool trace = false;
-		if (trace)
-		{
-			static ndFloat32 wheelOmega_ = 0.0f;
-			static ndFloat32 modelAlpha_ = 0.0f;
-			static ndFloat32 modelOmega_ = 0.0f;
-			
-			if (ndAbs(wheelOmega) > wheelOmega_)
-			{
-				trace = true;
-				wheelOmega_ = ndAbs(wheelOmega);
-			}
-			//if (ndAbs(modelAlpha) > modelAlpha_)
-			//{
-			//	trace = true;
-			//	modelAlpha_ = ndAbs(modelAlpha);
-			//}
-			//if (ndAbs(modelOmega) > modelOmega_)
-			//{
-			//	trace = true;
-			//	modelOmega_ = ndAbs(modelOmega);
-			//}
-			//if (trace)
-			{
-				//ndExpandTraceMessage("%f %f %f\n", modelOmega, modelAlpha, wheelOmega);
-				ndExpandTraceMessage("%f %f\n", wheelOmega, wheelReward);
-			}
-		}
+		//static bool trace = false;
+		//if (trace)
+		//{
+		//	static ndFloat32 wheelOmega_ = 0.0f;
+		//	static ndFloat32 modelAlpha_ = 0.0f;
+		//	static ndFloat32 modelOmega_ = 0.0f;
+		//	
+		//	if (ndAbs(wheelOmega) > wheelOmega_)
+		//	{
+		//		trace = true;
+		//		wheelOmega_ = ndAbs(wheelOmega);
+		//	}
+		//	//if (ndAbs(modelAlpha) > modelAlpha_)
+		//	//{
+		//	//	trace = true;
+		//	//	modelAlpha_ = ndAbs(modelAlpha);
+		//	//}
+		//	//if (ndAbs(modelOmega) > modelOmega_)
+		//	//{
+		//	//	trace = true;
+		//	//	modelOmega_ = ndAbs(modelOmega);
+		//	//}
+		//	//if (trace)
+		//	{
+		//		//ndExpandTraceMessage("%f %f %f\n", modelOmega, modelAlpha, wheelOmega);
+		//		ndExpandTraceMessage("%f %f\n", modelAlpha, modelAlphaReward);
+		//	}
+		//}
 
 		if (IsOnAir())
 		{
