@@ -150,29 +150,35 @@ namespace ndUnicyclePlayer
 			return ndBrainFloat(-1.0f);
 		}
 
+		//.const ndMatrix localFrame(ndGetIdentityMatrix());
+		//ndModelArticulation::ndCenterOfMassDynamics state(GetModel()->GetAsModelArticulation()->CalculateCentreOfMassKinematics(localFrame));
+
+		ndFloat32 boxAngle = GetBoxAngle();
+		ndFloat32 boxOmega = GetBoxOmega();
 		ndFloat32 poleAngle = GetPoleAngle();
 		ndFloat32 poleOmega = GetPoleOmega();
 		ndVector veloc(m_topBox->GetVelocity());
-
-		//ndFloat32 boxAngle = GetBoxAngle();
-		//ndFloat32 boxOmega = GetBoxOmega();
-		//ndFloat32 wheelOmega = ((ndJointRoller*)*m_wheelRoller)->GetOmega();
 		
 		ndFloat32 speedReward = ndExp(-100.0f * veloc.m_x * veloc.m_x);
+		ndFloat32 boxAngleReward = ndExp(-500.0f * boxAngle * boxAngle);
+		ndFloat32 boxOmegaReward = ndExp(-100.0f * boxOmega * boxOmega);
 		ndFloat32 poleAngleReward = ndExp(-500.0f * poleAngle * poleAngle);
 		ndFloat32 poleOmegaReward = ndExp(-100.0f * poleOmega * poleOmega);
 
 		if (IsOnAir())
 		{
+			boxAngleReward = 0.0f;
+			boxOmegaReward = 0.0f;
 			poleAngleReward = 0.0f;
 			poleOmegaReward = 0.0f;
 		}
 		//ndTrace(("%f %f %f\n", poleAngleReward, poleOmegaReward, speedReward));
-
-		return ndBrainFloat(
-				ndFloat32(1.0 / 4.0f) * poleAngleReward +
-				ndFloat32(1.0 / 4.0f) * poleOmegaReward +
-				ndFloat32(1.0 / 2.0f) * speedReward);
+		ndFloat32 reward = ndFloat32(1.0 / 2.0f) * boxAngleReward +
+						   ndFloat32(1.0 / 2.0f) * boxOmegaReward +
+						   ndFloat32(1.0 / 2.0f) * poleAngleReward +
+						   ndFloat32(1.0 / 2.0f) * poleOmegaReward +
+						   ndFloat32(1.0 / 2.0f) * speedReward;
+		return ndBrainFloat(reward);
 	}
 
 	void ndController::ApplyActions(ndBrainFloat* const actions)
