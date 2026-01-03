@@ -34,21 +34,22 @@
 //#define DEFAULT_SCENE	8		// Highfield collision
 //#define DEFAULT_SCENE	9		// static compound scene collision
 //#define DEFAULT_SCENE	10		// basic convex approximate compound shapes
-//#define DEFAULT_SCENE	11		// basic model, a npd vehicle prop
-//#define DEFAULT_SCENE	12		// basic rag doll
-//#define DEFAULT_SCENE	13		// complex model, implement a complex model with joints
-//#define DEFAULT_SCENE	14		// basics multi body vehicle
-//#define DEFAULT_SCENE	15		// object Placement
-//#define DEFAULT_SCENE	16		// third person player capsule
-//#define DEFAULT_SCENE	17		// cart pole SAC trained controller
-//#define DEFAULT_SCENE	18		// cart pole PPO trained controller
-//#define DEFAULT_SCENE	19		// unicycle PPO trained controller
-//#define DEFAULT_SCENE	20		// procedurally animated quadruped spider
+#define DEFAULT_SCENE	11		// basic procedural static collision
+//#define DEFAULT_SCENE	12		// basic model, a npd vehicle prop
+//#define DEFAULT_SCENE	13		// basic rag doll
+//#define DEFAULT_SCENE	14		// complex model, implement a complex model with joints
+//#define DEFAULT_SCENE	15		// basics multi body vehicle
+//#define DEFAULT_SCENE	16		// object Placement
+//#define DEFAULT_SCENE	17		// third person player capsule
+//#define DEFAULT_SCENE	18		// cart pole SAC trained controller
+//#define DEFAULT_SCENE	19		// cart pole PPO trained controller
+//#define DEFAULT_SCENE	20		// unicycle PPO trained controller
+//#define DEFAULT_SCENE	21		// procedurally animated quadruped spider
 
 // These are the machine learning training demos
 //#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 0)	// train cart pole using SAC agent
 //#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 1)	// train cart pole using PPO agent
-#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 2)	// train double pendulum unicycle using PPO agent
+//#define DEFAULT_SCENE			(MACHINE_LEARNING_BASE + 2)	// train double pendulum unicycle using PPO agent
 
 // legacy demos 
 //#define DEFAULT_SCENE	8		// particle fluid
@@ -86,6 +87,7 @@ void ndBasicHeighfieldCollision(ndDemoEntityManager* const scene);
 void ndBasicStaticMeshCollision(ndDemoEntityManager* const scene);
 void ndPlayerCapsule_ThirdPerson(ndDemoEntityManager* const scene);
 void ndBasicSceneCompoundCollision(ndDemoEntityManager* const scene);
+void ndBasicProcedualStaticCollision(ndDemoEntityManager* const scene);
 
 void ndCartpolePlayer_SAC(ndDemoEntityManager* const scene);
 void ndCartpolePlayer_PPO(ndDemoEntityManager* const scene);
@@ -108,6 +110,7 @@ ndDemoEntityManager::ndDemos ndDemoEntityManager::m_demosSelection[] =
 	{ "basic heighfield collision", ndBasicHeighfieldCollision},
 	{ "basic static compound scene collision", ndBasicSceneCompoundCollision},
 	{ "basic compound collision", ndBasicCompoundCollision},
+	{ "basic static procedural collision", ndBasicProcedualStaticCollision},
 	{ "basic model", ndBasicModel},
 	{ "basic ragdoll", ndBasicRagdoll},
 	{ "complex model", ndComplexModel},

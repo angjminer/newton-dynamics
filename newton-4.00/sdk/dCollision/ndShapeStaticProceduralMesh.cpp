@@ -27,11 +27,10 @@
 #include "ndPolygonMeshDesc.h"
 #include "ndShapeStaticProceduralMesh.h"
 
-ndShapeStaticProceduralMesh::ndShapeStaticProceduralMesh(ndFloat32 sizex, ndFloat32 sizey, ndFloat32 sizez)
+ndShapeStaticProceduralMesh::ndShapeStaticProceduralMesh()
 	:ndShapeStaticMesh(m_staticProceduralMesh)
 {
-	m_boxOrigin = ndVector::m_zero;
-	m_boxSize = ndVector(sizex, sizey, sizez, ndFloat32 (0.0f)) * ndVector::m_half;
+	SetAABB(ndVector::m_negOne, ndVector::m_one);
 }
 
 ndShapeStaticProceduralMesh::~ndShapeStaticProceduralMesh(void)
@@ -43,6 +42,14 @@ ndShapeInfo ndShapeStaticProceduralMesh::GetShapeInfo() const
 	ndShapeInfo info(ndShapeStaticMesh::GetShapeInfo());
 	info.m_procedural.m_noUsed = 0;
 	return info;
+}
+
+void ndShapeStaticProceduralMesh::SetAABB(const ndVector& p0, const ndVector& p1)
+{
+	ndVector q0(p0.GetMin(p1));
+	ndVector q1(p0.GetMax(p1));
+	m_boxOrigin = ndVector::m_half * (q1 + q0) & ndVector::m_triplexMask;
+	m_boxSize = ndVector::m_half * (q1 - q0) & ndVector::m_triplexMask;
 }
 
 void ndShapeStaticProceduralMesh::GetCollidingFaces(ndPolygonMeshDesc* const data) const
