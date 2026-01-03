@@ -141,6 +141,7 @@ namespace ndUnicyclePlayer
 		return fail;
 	}
 
+	#pragma optimize( "", off )
 	ndBrainFloat ndController::CalculateReward() const
 	{
 		if (IsTerminal())
@@ -150,9 +151,63 @@ namespace ndUnicyclePlayer
 			return ndBrainFloat(-1.0f);
 		}
 
-		//.const ndMatrix localFrame(ndGetIdentityMatrix());
-		//ndModelArticulation::ndCenterOfMassDynamics state(GetModel()->GetAsModelArticulation()->CalculateCentreOfMassKinematics(localFrame));
+#if 1
+		ndIkSolver solver;
+		const ndMatrix comFrame(ndGetIdentityMatrix());
+		ndFixSizeArray<ndJointBilateralConstraint*, 64> extraJoint;
+		const ndModelArticulation::ndCenterOfMassDynamics comDynamics(GetModel()->GetAsModelArticulation()->CalculateCentreOfMassDynamics(solver, comFrame, extraJoint, m_timestep));
 
+		const ndVector comOmega(comDynamics.m_omega);
+		const ndVector comAlpha(comDynamics.m_alpha);
+		const ndVector planePin(m_poleHinge->GetLocalMatrix1().m_front);
+
+		ndFloat32 wheelOmega = ((ndJointRoller*)*m_wheelRoller)->GetOmega();
+		ndFloat32 modelAlpha = planePin.DotProduct(comAlpha).GetScalar();
+		ndFloat32 modelOmega = planePin.DotProduct(comOmega).GetScalar();
+
+		ndFloat32 modelOmegaReward = ndExp(-500.0f * modelOmega * modelOmega);
+		ndFloat32 modelAlphaReward = ndExp(-100.0f * modelAlpha * modelAlpha);
+		ndFloat32 wheelReward = ndExp(-0.1f * wheelOmega * wheelOmega);
+
+		static bool trace = false;
+		if (trace)
+		{
+			static ndFloat32 wheelOmega_ = 0.0f;
+			static ndFloat32 modelAlpha_ = 0.0f;
+			static ndFloat32 modelOmega_ = 0.0f;
+			
+			if (ndAbs(wheelOmega) > wheelOmega_)
+			{
+				trace = true;
+				wheelOmega_ = ndAbs(wheelOmega);
+			}
+			//if (ndAbs(modelAlpha) > modelAlpha_)
+			//{
+			//	trace = true;
+			//	modelAlpha_ = ndAbs(modelAlpha);
+			//}
+			//if (ndAbs(modelOmega) > modelOmega_)
+			//{
+			//	trace = true;
+			//	modelOmega_ = ndAbs(modelOmega);
+			//}
+			//if (trace)
+			{
+				//ndExpandTraceMessage("%f %f %f\n", modelOmega, modelAlpha, wheelOmega);
+				ndExpandTraceMessage("%f %f\n", wheelOmega, wheelReward);
+			}
+		}
+
+		if (IsOnAir())
+		{
+			modelOmegaReward = ndFloat32(0.0f);
+			modelAlphaReward = ndFloat32(0.0f);
+		}
+		ndFloat32 reward = 
+			ndFloat32(0.2f) * wheelReward +
+			ndFloat32(0.4f) * modelOmegaReward +
+			ndFloat32(0.4f) * modelAlphaReward;
+#else
 		ndFloat32 boxAngle = GetBoxAngle();
 		ndFloat32 boxOmega = GetBoxOmega();
 		ndFloat32 poleAngle = GetPoleAngle();
@@ -178,6 +233,7 @@ namespace ndUnicyclePlayer
 						   ndFloat32(1.0 / 2.0f) * poleAngleReward +
 						   ndFloat32(1.0 / 2.0f) * poleOmegaReward +
 						   ndFloat32(1.0 / 2.0f) * speedReward;
+#endif
 		return ndBrainFloat(reward);
 	}
 

@@ -141,8 +141,8 @@ namespace ndUnicycleTrainer_ppo
 			loader.m_mesh->m_matrix = loader.m_mesh->m_matrix * matrix;
 			
 			// create an articulated model
-			const ndInt32 numberOfAgents = 10;
-			//const ndInt32 numberOfAgents = 1;
+			//const ndInt32 numberOfAgents = 10;
+			const ndInt32 numberOfAgents = 1;
 			for (ndInt32 i = 0; i < numberOfAgents; ++i)
 			{
 				ndFloat32 x = ndFloat32(10.0f) * (ndRand() - ndFloat32(0.5f));

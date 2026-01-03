@@ -420,8 +420,8 @@ void ndIkSolver::BuildMassMatrix()
 							return surrogateBody;
 						};
 
-						ndBodyKinematic* const body0 = contact->GetBody0()->GetAsBodyDynamic();
-						ndBodyKinematic* const body1 = contact->GetBody1()->GetAsBodyDynamic();
+						ndBodyKinematic* const body0 = contact->GetBody0()->GetAsBodyKinematic();
+						ndBodyKinematic* const body1 = contact->GetBody1()->GetAsBodyKinematic();
 						if (body0 == body)
 						{
 							if (body1->GetInvMass() == ndFloat32(0.0f))
