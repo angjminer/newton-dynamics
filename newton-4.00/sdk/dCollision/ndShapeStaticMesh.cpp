@@ -106,9 +106,8 @@ void ndShapeStaticMesh::GetCollidingFaces(ndPolygonMeshDesc* const) const
 
 void ndShapeStaticMesh::CalculateAabb(const ndMatrix& matrix, ndVector &p0, ndVector &p1) const
 {
-	ndVector origin(matrix.TransformVector(m_boxOrigin));
-	ndVector size(matrix.m_front.Abs().Scale(m_boxSize.m_x) + matrix.m_up.Abs().Scale(m_boxSize.m_y) + matrix.m_right.Abs().Scale(m_boxSize.m_z));
-
+	const ndVector origin(matrix.TransformVector(m_boxOrigin));
+	const ndVector size(matrix.m_front.Abs().Scale(m_boxSize.m_x) + matrix.m_up.Abs().Scale(m_boxSize.m_y) + matrix.m_right.Abs().Scale(m_boxSize.m_z));
 	p0 = (origin - size) & ndVector::m_triplexMask;
 	p1 = (origin + size) & ndVector::m_triplexMask;
 }
