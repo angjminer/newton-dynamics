@@ -83,7 +83,7 @@ void ndDebugDisplayRenderPass::RenderCollisionShape()
 		const ndShapeInstance& shapeInstance = body->GetCollisionShape();
 
 		ndShape* const key = (ndShape*)shapeInstance.GetShape();
-		if (key->GetAsShapeNull() || key->GetAsShapeStaticProceduralMesh())
+		if (key->GetAsShapeNull())
 		{
 			continue;
 		}
