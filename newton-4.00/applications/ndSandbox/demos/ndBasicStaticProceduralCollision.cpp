@@ -28,9 +28,14 @@ void ndBasicProcedualStaticCollision(ndDemoEntityManager* const scene)
 	ndMatrix origin(ndCalculateMatrix(rot, floor));
 
 	// add single box for testing
-	AddBox(scene, origin, 1.0f, 1.0f, 0.5f, 2.0f, "wood_0.png");
+	//ndSharedPtr<ndBody> testShape(AddSphere(scene, origin, 1.0f, 0.25f, "wood_0.png"));
+	ndSharedPtr<ndBody> testShape(AddCapsule(scene, origin, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
+	//ndSharedPtr<ndBody> testShape(AddBox(scene, origin, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
+	//ndSharedPtr<ndBody> testShape(AddCylinder(scene, origin, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
+	//ndSharedPtr<ndBody> testShape(AddConvexHull(scene, origin, 40.0f, 0.7f, 1.0f, 10, "wood_0.png"));
+	testShape->SetOmega(ndVector (20.0f, 0.0f, 0.0f, 0.0f));
 
-	//// add few props
+	////// add few props
 	//origin.m_posit += origin.m_front.Scale (ndFloat32 (40.0f));
 	//AddCapsuleStacks(scene, origin, 10.0f, 0.5f, 0.5f, 1.0f, 10, 10, 7);
 	//
