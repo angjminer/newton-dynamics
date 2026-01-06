@@ -652,7 +652,7 @@ bool dgCollisionConvexHull::Create (dgInt32 count, dgInt32 strideInBytes, const 
 	
 	if (vertexCount > DG_CONVEX_VERTEX_SPLITE_SIZE) {
 		// create a face structure for support vertex
-			dgStack<dgConvexBox> boxTree (vertexCount);
+		dgStack<dgConvexBox> boxTree (vertexCount);
 		dgTree<dgVector,dgInt32> sortTree(GetAllocator());
 		dgStack<dgTree<dgVector,dgInt32>::dgTreeNode*> vertexNodeList(vertexCount);
 
@@ -831,14 +831,10 @@ dgInt32 dgCollisionConvexHull::CalculateSignature () const
 //	return CalculateSignature (m_vertexCount, &m_vertex[0].m_x, sizeof (dgVector));
 }
 
-
-
 void dgCollisionConvexHull::SetCollisionBBox (const dgVector& p0__, const dgVector& p1__)
 {
 	dgAssert (0);
 }
-
-
 
 void dgCollisionConvexHull::DebugCollision (const dgMatrix& matrix, dgCollision::OnDebugCollisionMeshCallback callback, void* const userData) const
 {
