@@ -23,27 +23,28 @@ void ndBasicProcedualStaticCollision(ndDemoEntityManager* const scene)
 
 	// build a placemnet matrix
 	ndQuaternion rot(ndYawMatrix(180.0f * ndDegreeToRad));
-	ndVector floor(FindFloor(*scene->GetWorld(), ndVector::m_zero, 200.0f));
+	ndVector origin(10.0f, 0.0f, 0.0f, 1.0f);
+	ndVector floor(FindFloor(*scene->GetWorld(), origin, 200.0f));
 
-	ndMatrix origin(ndCalculateMatrix(rot, floor));
+	ndMatrix originMatrix(ndCalculateMatrix(rot, floor));
 
 	// add single box for testing
-	//ndSharedPtr<ndBody> testShape(AddSphere(scene, origin, 1.0f, 0.25f, "wood_0.png"));
-	ndSharedPtr<ndBody> testShape(AddCapsule(scene, origin, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
-	//ndSharedPtr<ndBody> testShape(AddBox(scene, origin, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
-	//ndSharedPtr<ndBody> testShape(AddCylinder(scene, origin, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
-	//ndSharedPtr<ndBody> testShape(AddConvexHull(scene, origin, 40.0f, 0.7f, 1.0f, 10, "wood_0.png"));
-	testShape->SetOmega(ndVector (20.0f, 0.0f, 0.0f, 0.0f));
+	ndSharedPtr<ndBody> testShape(AddSphere(scene, originMatrix, 1.0f, 0.25f, "wood_0.png"));
+	//ndSharedPtr<ndBody> testShape(AddCapsule(scene, originMatrix, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
+	//ndSharedPtr<ndBody> testShape(AddBox(scene, originMatrix, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
+	//ndSharedPtr<ndBody> testShape(AddCylinder(scene, originMatrix, 1.0f, 0.5f, 0.5f, 1.0f, "wood_0.png"));
+	//ndSharedPtr<ndBody> testShape(AddConvexHull(scene, originMatrix, 40.0f, 0.7f, 1.0f, 10, "wood_0.png"));
+	//testShape->SetOmega(ndVector (20.0f, 0.0f, 0.0f, 0.0f));
 
 	////// add few props
-	//origin.m_posit += origin.m_front.Scale (ndFloat32 (40.0f));
-	//AddCapsuleStacks(scene, origin, 10.0f, 0.5f, 0.5f, 1.0f, 10, 10, 7);
+	//originMatrix.m_posit += originMatrix.m_front.Scale (ndFloat32 (40.0f));
+	//AddCapsuleStacks(scene, originMatrix, 10.0f, 0.5f, 0.5f, 1.0f, 10, 10, 7);
 	//
-	//origin.m_posit += origin.m_right.Scale(20.0f);
-	//AddPlanks(scene, origin, 1.0f, 4);
+	//originMatrix.m_posit += originMatrix.m_right.Scale(20.0f);
+	//AddPlanks(scene, originMatrix, 1.0f, 4);
 
 	// set the camera
 	floor.m_y += 1.0f;
-	floor.m_x += 8.0f;
+	floor.m_x += 4.0f;
 	scene->SetCameraMatrix(rot, floor);
 }
