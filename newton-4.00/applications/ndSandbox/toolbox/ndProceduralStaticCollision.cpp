@@ -100,7 +100,6 @@ class ndProceduralTerrainShape : public ndShapeStaticProceduralMesh
 		for (ndInt32 i = 0; i < m_heightfield.GetCapacity(); ++i)
 		{
 			ndFloat32 y = m_heightfield[i];
-			//y = scale * (y - minHeight);
 			y = scale * y;
 			m_heightfield[i] = y;
 		}
