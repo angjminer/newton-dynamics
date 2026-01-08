@@ -64,6 +64,7 @@ class ndShapeStaticMesh: public ndShape
 
 		void GetFacesPatch(ndPolygonMeshDesc* const data);
 
+		friend class ndShapeHeightfield;
 		friend class ndShapeStaticProceduralMesh;
 	};
 
