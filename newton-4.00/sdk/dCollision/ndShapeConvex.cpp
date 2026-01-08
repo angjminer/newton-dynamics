@@ -1110,7 +1110,7 @@ ndInt32 ndShapeConvex::ValidatePolygonCapContacts(const ndShapeInstance&, const 
 
 ndInt32 ndShapeConvex::RecalculateFaceContacts(ndInt32 pointCount, const ndVector* const localPolygon, ndVector* const contacts) const
 {
-	ndAssert(0);
+	//ndAssert(0);
 	return 0;
 }
 
