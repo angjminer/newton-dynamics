@@ -107,6 +107,7 @@ class ndProceduralTerrainShape : public ndShapeStaticProceduralMesh
 
 	virtual void DebugShape(const ndMatrix& matrix, ndShapeDebugNotify& notify) const override
 	{
+		ndVector face[4];
 		ndShapeDebugNotify::ndEdgeType edgeType = ndShapeDebugNotify::m_shared;
 		for (ndInt32 z = 0; z < D_TERRAIN_HEIGHT - 1; z++)
 		{
@@ -121,16 +122,29 @@ class ndProceduralTerrainShape : public ndShapeStaticProceduralMesh
 				const ndVector q0(matrix.TransformVector(ndVector(ndFloat32(x) * D_TERRAIN_GRID_SIZE, ndFloat32(row[x]),                   ndFloat32(z + 0) * D_TERRAIN_GRID_SIZE, ndFloat32(1.0f))));
 				const ndVector q1(matrix.TransformVector(ndVector(ndFloat32(x) * D_TERRAIN_GRID_SIZE, ndFloat32(row[x + D_TERRAIN_WIDTH]), ndFloat32(z + 1) * D_TERRAIN_GRID_SIZE, ndFloat32(1.0f))));
 
-				ndVector triangle[3];
-				triangle[0] = p0;
-				triangle[1] = p1;
-				triangle[2] = q0;
-				notify.DrawPolygon(3, triangle, &edgeType);
+				const ndVector normal(((p0 - q0).CrossProduct(p1 - q0)).Normalize());
+				ndAssert(normal.m_w == ndFloat32(0.0f));
+				ndFloat32 dist = normal.DotProduct(q1 - q0).GetScalar();
+				if (ndAbs(dist) < ndFloat32(1.0e-3f))
+				{
+					face[0] = p0;
+					face[1] = p1;
+					face[2] = q1;
+					face[3] = q0;
+					notify.DrawPolygon(4, face, &edgeType);
+				}
+				else
+				{
+					face[0] = p0;
+					face[1] = p1;
+					face[2] = q0;
+					notify.DrawPolygon(3, face, &edgeType);
 
-				triangle[0] = p1;
-				triangle[1] = q1;
-				triangle[2] = q0;
-				notify.DrawPolygon(3, triangle, &edgeType);
+					face[0] = p1;
+					face[1] = q1;
+					face[2] = q0;
+					notify.DrawPolygon(3, face, &edgeType);
+				}
 
 				p0 = q0;
 				p1 = q1;
